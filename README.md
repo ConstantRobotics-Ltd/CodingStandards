@@ -15,8 +15,9 @@
   - [Style](##Style)
     - [Naming](###Naming)
     - [Composition](#Composition)
+    - [Documentation](#Documentation)
     - [Good practices](###Good practices)
-  - [Recommended tools and libraries](#Recommended tools and libraries)
+  - [Code Managment](#Code Managment)
   - [Recommended tools and libraries](#Recommended tools and libraries)
   - [Recommended tools and libraries](#Recommended tools and libraries)
   
@@ -92,33 +93,31 @@ Consistency is the most important aspect of style. The second most important asp
 
 2. Strive to strike a balance in commenting your code - while it is crucial to provide sufficient comments for clarity and understanding, aim to keep them concise and focused, avoiding unnecessary verbosity to maintain code readability and promote efficient collaboration, e.g. - 
   ```c++
-  // Good comment:
-  // This equation comes from mass–energy equivalence E=mc^2.
-  auto energy = mass * speedOfLight * speedOfLight;
-  
-  // Bad comment(code explains itself, comment is redundant):
-  // Check if energy was calculated.
-  if (energy.isCalculated()) {}
+    // Good comment:
+    // This equation comes from mass–energy equivalence E=mc^2.
+    auto energy = mass * speedOfLight * speedOfLight;
+   
+    // Bad comment(code explains itself, comment is redundant):
+    // Check if energy was calculated.
+    if (energy.isCalculated()) {}
   ```
 3. Curly brackets *'{}'* are **required** for blocks. It costs you nothing, but can cost a lot of time for someone changing code after you, e.g. 
-
-
-   ```c++
-   // Bad Idea
-   // This compiles and does what you want, but can lead to confusing
-   // errors if modification are made in the future and close attention is not paid.
-   for (int i = 0; i < 15; ++i)
-     std::cout << i << std::endl;
-   
-   // Good Idea
-   // It's clear which statements are part of the loop (or if block, or whatever).
-   for (int i = 0; i < 15; ++i) 
-   {
-     std::cout << i << std::endl;
-   }
-   ```
+  ```c++
+    // Bad Idea
+    // This compiles and does what you want, but can lead to confusing
+    // errors if modification are made in the future and close attention  is not paid.
+    for (int i = 0; i < 15; ++i)
+      std::cout << i << std::endl;
+    
+    // Good Idea
+    // It's clear which statements are part of the loop (or if block, or  whatever).
+    for (int i = 0; i < 15; ++i) 
+    {
+      std::cout << i << std::endl;
+    }
+  ```
 4. Take whole line for a single curly bracket (just to keep the same visual style everywhere).
-   ```c++
+  ```c++
    // Like this:
    if (i == 0) 
    {
@@ -128,42 +127,65 @@ Consistency is the most important aspect of style. The second most important asp
    if (i == 0) {
      std::cout << i << std::endl;
    }
-   ```
+  ```
 
 5. Keep lines a reasonable length. In header files do not cross length of **80** characters.
 
-6. ssa 
+6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add *'cr::image'* if there is already *'cr::frame'*.
 
-7. ada 
+7. a
+
+### Documentation
+
+1. Each class, method, field, function has to have descriptive documentation written as a comment in header file.
+
+2. Use `/* */` only for documentation, e.g. -
+   ```c++
+    /**
+     * @brief Set the value for a specific template parameter.
+     * @param id The identifier of the template parameter.
+     * @param value The value to set for the parameter.
+     * @return True if the parameter was successfully set, false otherwise.
+     */
+   bool setParam(TemplateParam id, float value);
+   ```
+3. Keep the documentation up-to-date when making changes to the code.
 
 ### Good practices
 
 1. Use *'nullptr'* to indicate a null pointer. Not NULL nor 0.
 
-2. **Never** use *'using namespace'* in a header file. Try to avoid also in source C++ files.
+2. **Never** use *'using namespace'* in a header file. Try to avoid also in source C++ files, since it can create name conflicts and ambiguities.
 
 3. Apply *'include'* guards to avoid including the same file multiple times. Use *'#pragma once'*.
 
-4. Always use namespaces while creating new class.
-   ```c++
+4. Always use namespaces while creating new class. All namespaces should be placed in one general namespace *'cr'*.
+```c++
    #pragma once
    
+   namespace cr
+   {
    namespace temp
    {
    class TempClass
    {
-       
+       TempClass();
    };
    }
-   ```
+   }
+```
+5. 
 
-   
+## Code Managment
 
-   
+### Commits 
 
-   
 
-   
+
+
+
+
+
 
 ## Recommended tools and libraries
 
