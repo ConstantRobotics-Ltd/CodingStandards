@@ -17,11 +17,11 @@ struct TemplateParamsMask
 class TemplateParams
 {
 public:
-    /// First template param.
+    /// First template param. Here describe what status does this flag define.
     bool firstParam{ false };
-    /// Second template param.
+    /// Second template param. Here describe what number does it store and what is the range.
     int secondParam{ 0 };
-    /// Third template param.
+    /// Third template param. Here describe what number does it store and what is the range and why float.
     float thirdParam{ 0.0f };
 
     JSON_READABLE(TemplateParams, firstParam, secondParam, thirdParam)
@@ -58,30 +58,54 @@ enum class TemplateCommand
     THIRD_COMMAND
 };
 
-class TemplateLibrary
-{
+/**
+ * @brief The TemplateLibrary class provides a template library with various functionalities.
+ */
+class TemplateLibrary {
 public:
-    /// Class destructor.
+    /**
+     * @brief Constructor for the TemplateLibrary class.
+     */
     TemplateLibrary();
 
-    /// Class destructor.
+    /**
+     * @brief Destructor for the TemplateLibrary class.
+     */
     ~TemplateLibrary();
 
-    /// Get TemplateLibrary class version.
+    /**
+     * @brief Get the version of the TemplateLibrary class.
+     * @return A string representing the version.
+     */
     static std::string getVersion();
 
-    /// Set the template param.
+    /**
+     * @brief Set the value for a specific template parameter.
+     * @param id The identifier of the template parameter.
+     * @param value The value to set for the parameter.
+     * @return True if the parameter was successfully set, false otherwise.
+     */
     bool setParam(TemplateParam id, float value);
 
-    /// Get the template param.
+    /**
+     * @brief Get the value of a specific template parameter.
+     * @param id The identifier of the template parameter.
+     * @return The value of the specified parameter.
+     */
     float getParam(TemplateParam id);
 
-    /// Get the template params structure.
+    /**
+     * @brief Get the structure containing all template parameters.
+     * @param params Reference to a TemplateParams structure to store the parameters.
+     */
     void getParams(TemplateParams& params);
 
-    /// Execute template command.
+    /**
+     * @brief Execute a template command.
+     * @param id The identifier of the template command to be executed.
+     * @return True if the command was executed successfully, false otherwise.
+     */
     bool executeCommand(TemplateCommand id);
 };
-
 }
 }
