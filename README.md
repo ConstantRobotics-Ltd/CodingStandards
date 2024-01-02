@@ -36,9 +36,9 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Naming
 
-1. Use **PascalCase** for naming: a class, an enum class or a function, e.g. - *'TemplateLibrary'*.
+1. Use **PascalCase** for naming: a class, an enum class or a struct, e.g. - *'TemplateLibrary'*.
 
-2. Use **camelCase** for naming: a local variable or a method, e.g. - *'setParam()'*.
+2. Use **camelCase** for naming: a local variable, function or a method, e.g. - *'setParam()'*.
 
 3. Use **upper case with underscores** for naming: a constant, e.g. - *'MAX_CONSTANT_VALUE'*.
 
@@ -194,7 +194,6 @@ Consistency is the most important aspect of style. The second most important asp
    git commit -m "Fix memory leak after copying frame bug"
    ```
 
-   
 
 ### Branches
 
@@ -204,8 +203,8 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Pull-requests
 
-1. Pull-request should be named the same as branch.
-2. Pull-request can be closed only after approves from all reviewers.
+1. Pull-request should be named the same as a branch.
+2. Pull-request can be closed only after approval from all reviewers.
 
 ## Recommended tools and libraries
 
