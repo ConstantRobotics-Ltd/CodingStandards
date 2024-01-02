@@ -131,6 +131,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 5. Keep lines a reasonable length. In header files do not cross length of **80** characters.
 6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add *'cr::image'* if there is already *'cr::frame'*.
+7. 3 lines empty spaces between methods bodies?
 
 ### Documentation
 
@@ -234,9 +235,15 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Branches
 
+1. When to create a branch?
+2. Branch names.
+3. When to close?
+
 ### Pull-requests
 
-
+1. PR title.
+2. PR description.
+3. PR rules, reviewers, who close, who opens, etc.
 
 
 
@@ -257,6 +264,7 @@ C++ best practices -
 1. https://github.com/cpp-best-practices/cppbestpractices
 2. https://google.github.io/styleguide/cppguide.html
 3. https://isocpp.org/wiki/faq/coding-standards
+4. Clean C++ - Stephan Roth, 2017
 
 
 Clean Code tips - 
