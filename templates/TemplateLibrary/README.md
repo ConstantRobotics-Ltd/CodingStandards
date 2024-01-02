@@ -478,6 +478,7 @@ if (${PARENT}_SUBMODULE_TEMPLATE_LIBRARY)
     SET(${PARENT}_TEMPLATE_LIBRARY                      ON  CACHE BOOL "" FORCE)
     SET(${PARENT}_TEMPLATE_LIBRARY_TEST                 OFF CACHE BOOL "" FORCE)
     SET(${PARENT}_TEMPLATE_LIBRARY_EXAMPLE              OFF CACHE BOOL "" FORCE)
+    SET(${PARENT}_TEMPLATE_LIBRARY_DEMO                 OFF CACHE BOOL "" FORCE)
 endif()
 
 ################################################################################

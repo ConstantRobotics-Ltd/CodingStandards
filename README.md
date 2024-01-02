@@ -1,11 +1,8 @@
-![img](_static/rapid_pixel_logo.png)
-
-# Rapid Pixel SDK Coding Standards
+# Coding Standards
 
 # Table of contents
 
 - [Intro](#Intro)
-- [SDK Structure](#SDK Structure)
 - [Repository Structure](#Repository Structure)
 	- [demo](#demo)
 	- [example](#example)
@@ -17,8 +14,8 @@
     - [Composition](#Composition)
     - [Documentation](#Documentation)
     - [Good practices](###Good practices)
-  - [Memory Managment](##Memory Managment)
-  - [Code Managment](##Code Managment)
+  - [Memory Management](##Memory Management)
+  - [Code Management](##Code Management)
   	- [Commits](###Commits)
   	- [Branches](###Branches)
   	- [Pull-requests](###Pull-requests)
@@ -26,46 +23,8 @@
 
 # Intro
 
-Welcome to our Way of Work document for RapidPixel SDK. This guide outlines essential principles for efficient collaboration, project management, code maintenance, library usage, and readability. By following these guidelines, we aim to boost efficiency, organization, and code quality. Let's work together to create high-quality software while minimizing unnecessary challenges. Thank you for contributing to our cohesive and productive development environment!
+This is Constant Robotics Coding Standards document. This guide outlines essential principles for efficient collaboration, project management, code maintenance, library usage, and readability. By following these guidelines, we aim to boost efficiency, organization, and code quality. Let's work together to create high-quality software while minimizing unnecessary challenges. Thank you for contributing to our cohesive and productive development environment!
 
-# SDK Structure
-
-SDK(Software Development Toolkit) is distributed across multiple repositories, each serving a specific purpose. Structure leverages a predominantly private repository setup, securing proprietary code and sensitive information. However, for shared practices and streamlined development, we maintain selected public template repositories. These templates offer standardized configurations and guidelines.
-
-# Repository structure
-
-The SDK repositories follow structure designed to enhance clarity and facilitate efficient development. Template library that stands as an example of perfect folder and files layout can be found here - [TemplateLibrary](https://github.com/ConstantRobotics-Ltd/CodingStandards/tree/master/templates/TemplateLibrary).
-
-``` markdown
-  --- 3rdparty
-  --- demo
-  --- example
-  --- src
-  --- test
-  --- .gitignore
-  --- .gitmodules
-  --- CMakeLists.txt
-  --- README.md
-```
-
-## 3rdparty
-**3rdparty** folder should contain all necessary dependencies to the main project. Make sure it does not include any redundant libraries. Additional CMakeLists.txt file inside is obligatory.
-
-## demo
-
-**demo** folder should contain *main.cpp* file with related *CMakLists.txt* file. Also additional *3rdparty* folder with dependencies if needed. Demo application have to allow user testing all main functionalities of the library. It should enclose ability to test different parameters and record a video (for video processing libraries), but also be as simple as possible. Include manual in .md and .pdf formats.
-
-## example
-
-**example** folder should contain *main.cpp* file with related *CMakLists.txt* file. The simplest application possible with the shortest code.
-
-## src
-
-**src** folder should contain all *Lib.cpp* and *Lib.h* files as well as version files and related *CMakLists.txt* file. 
-
-## test
-
-**test** folder should contain *main.cpp* file with related *CMakLists.txt* file. Folder designed for all testing related stuff that is necessary during creation of library. Can be used for internal tests of feature, but it does not mean it can be dirty.
 
 # Coding Guide
 
@@ -131,7 +90,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 5. Keep lines a reasonable length. In header files do not cross length of **80** characters.
 6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add *'cr::image'* if there is already *'cr::frame'*.
-7. 3 lines empty spaces between methods bodies?
+7. Keep 3-lines space between each method or function body.
 
 ### Documentation
 
@@ -147,13 +106,14 @@ Consistency is the most important aspect of style. The second most important asp
      */
    bool setParam(TemplateParam id, float value);
    ```
+
 3. Keep the documentation up-to-date when making changes to the code.
 
 ### Good practices
 
 1. Use *'nullptr'* to indicate a null pointer. Not NULL nor 0.
 
-2. **Never** use *'using namespace'* in a header file. Try to avoid also in source C++ files, since it can create name conflicts and ambiguities. [Why is "using namespace" considered a bad practice](https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice)
+2. **Never** use *'using namespace'* in a header file. Try to avoid also in source C++ files, since it can create name conflicts and ambiguities. [Why is "using namespace" is considered a bad practice.](https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice)
 
 3. Apply *'include'* guards to avoid including the same file multiple times. Use *'#pragma once'*.
 
@@ -177,15 +137,18 @@ Consistency is the most important aspect of style. The second most important asp
    unsigned value = -1; // Narrowing from signed to unsigned.
    unsigned valueB{ -1 }; // Narrowing from signed to unsigned not alllowed, compile time error.
    ```
-   
-6. Use C++-style cast instead of C-style cast. Use the C++-style cast (static\_cast<>, dynamic\_cast<> ...) instead of the C-style cast. The C++-style cast allows more compiler checks and is considerably safer. Additionally the C++ cast style is more visible and has the possibility to search for. [Further reading](https://anteru.net/blog/2007/c-background-static-reinterpret-and-c-style-casts/).
 
-7. Avoid using macros for constant values. Use constexpr, not `#define PI 3.14159;`,
+6. When building a class with fields, always initialize member variables in header file, not in constructor.
+
+7. Use C++-style cast instead of C-style cast. Use the C++-style cast (static\_cast<>, dynamic\_cast<> ...) instead of the C-style cast. The C++-style cast allows more compiler checks and is considerably safer. Additionally the C++ cast style is more visible and has the possibility to search for. [Further reading](https://anteru.net/blog/2007/c-background-static-reinterpret-and-c-style-casts/).
+
+8. Avoid using macros for constant values. Use constexpr:
+   not `#define PI 3.14159;`, 
    but `constexpr double PI = 3.14159;`.
 
 ## Memory Management
 
-1. Using smart pointers such as `std::unique_ptr` and `std::shared_ptr` in C++11 and later versions is recommended over raw memory access, allocation, and deallocation to mitigate the risks of memory errors and leaks.
+1. Using smart pointers such as `std::unique_ptr` and `std::shared_ptr` in C++11 and later versions is recommended over raw memory access, allocation, and deallocation to mitigate the risks of memory errors and leaks. When using C-style pointers check twice proper memory (de)allocation.
 
 2. Always use `const` if possible, this helps the compiler optimize the code and is more unequivocal for developer.
 
@@ -198,7 +161,7 @@ Consistency is the most important aspect of style. The second most important asp
    std::atomic<bool> templateVariable{ false };
    templateVariable.store(true);
    
-   TemplateParams templateParams;
+   TemplateParams templateParams{};
    std::mutex templateParamsMutex;
    
    templateParamsMutex.lock();
@@ -206,7 +169,7 @@ Consistency is the most important aspect of style. The second most important asp
    templateParamsMutex.unlock();
    ```
 
-6. If semantically correcy prefer `++i` to `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
+6. If semantically correcy prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
 
 
 
@@ -214,7 +177,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Commits 
 
-1. Commit as often as possible. Don't wait until you finish the task with commiting. Wrong combination of `Ctrl+Z` and `Ctrl+Y` may cost you losing a lot of code while prototyping. Frequent commits allow you to make smaller, focused changes to your codebase. Each commit represents a single logical unit of work or a specific feature/fix. This granularity makes it easier to understand the history of changes, identify the cause of issues, and review or revert changes if needed.
+1. Commit as often as possible. Don't wait until you finish the task with committing. Wrong combination of `Ctrl+Z` and `Ctrl+Y` may cost you losing a lot of code while prototyping. Frequent commits allow you to make smaller, focused changes to your codebase. Each commit represents a single logical unit of work or a specific feature/fix. This granularity makes it easier to understand the history of changes, identify the cause of issues, and review or revert changes if needed.
 
 2. Write your commit messages in the imperative mood, as it follows same style as commits generated by git commands. 
    ```bash
@@ -235,28 +198,21 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Branches
 
-1. When to create a branch?
-2. Branch names.
-3. When to close?
+1. A new branch should be created each time you want to fix something or add a new feature to the master branch.
+2. Connect Branch with Task from Projects board on GitHub. Create name related to Task name.
+3. A Branch should be closed automatically by Pull-request after merge.
 
 ### Pull-requests
 
-1. PR title.
-2. PR description.
-3. PR rules, reviewers, who close, who opens, etc.
-
-
-
-
-
-
-
+1. Pull-request should be named the same as branch.
+2. Pull-request can be closed only after approves from all reviewers.
 
 ## Recommended tools and libraries
 
-
-
-IDEs?
+1. [Visual Studio Code](https://code.visualstudio.com/download) - simple and powerful IDE.
+2. [Visual Studio for Windows](https://visualstudio.microsoft.com/pl/downloads/) - the most complex C++ IDE.
+3. [Qt Creator](https://www.qt.io/download) - Qt IDE with Qt GUI tools.
+4. [Sourcetree](https://www.sourcetreeapp.com) - very convenient desktop application for git control.
 
 # Resources
 
