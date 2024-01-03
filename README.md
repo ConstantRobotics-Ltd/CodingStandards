@@ -145,6 +145,38 @@ Consistency is the most important aspect of style. The second most important asp
 8. Avoid using macros for constant values. Use constexpr:
    not `#define PI 3.14159;`, 
    but `constexpr double PI = 3.14159;`.
+  
+9. Use scoped enums (**enum class**). They prevent implicit conversions to other types, reducing bugs, and avoid name conflicts by scoping enumerators within the enum.
+  ```cpp
+  enum class Color 
+  {
+    RED,
+    GREEN,
+    BLUE
+  };
+  ```
+
+10. Use "override" keyword for all polimorphic member functions, this way compiler will give error if you made mistake while overriding a method. 
+  ```cpp
+  class Base
+  {
+    virtual void foo();
+  };
+
+  class Derived
+  {
+    void foo() override;
+  };
+  ```
+
+11. No destructor is always better when it’s the correct thing to do. If you dont need destructor, dont define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
+
+12. Try to avoid using global state. There are two main reasons :
+  - Global state can result in subtle and difficult to trace bugs where one function changes global state, and another function either relies on that change or is adversely affected by it.
+  - It is never known who might update the value.
+
+If you cant avoid you using them at least make them internally linked by using unnamed namespaces. By this way, it will be invisible even if it is externed from another source file.
+
 
 ## Memory Management
 
@@ -170,6 +202,10 @@ Consistency is the most important aspect of style. The second most important asp
    ```
 
 6. If semantically correcy prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
+
+7. If there is a chance that your class will be used as base class. Always keep destructor virtual. This is OBLIGATORY rule.
+
+8. When you define a destructor in a class, it's important to also explicitly define or delete all constructors and assignment operators. This ensures proper management of resources, as the compiler's implicit versions may not handle resource management correctly. This rule is known as [Rule of three (until C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three) or [Rule of five (after C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
 
 
