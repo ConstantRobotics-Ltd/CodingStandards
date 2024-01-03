@@ -175,7 +175,7 @@ Consistency is the most important aspect of style. The second most important asp
   - Global state can result in subtle and difficult to trace bugs where one function changes global state, and another function either relies on that change or is adversely affected by it.
   - It is never known who might update the value.
 
-If you cant avoid you using them at least make them internally linked by using unnamed namespaces. By this way, it will be invisible even if it is externed from another source file.
+If you cant avoid using them at least make them internally linked by using unnamed namespaces. By this way, it will be invisible even if it is externed from another source file.
 
 
 ## Memory Management
@@ -201,7 +201,7 @@ If you cant avoid you using them at least make them internally linked by using u
    templateParamsMutex.unlock();
    ```
 
-6. If semantically correcy prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
+6. If semantically correct prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
 
 7. If there is a chance that your class will be used as base class. Always keep destructor virtual. This is OBLIGATORY rule.
 
