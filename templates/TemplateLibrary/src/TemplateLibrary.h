@@ -1,54 +1,91 @@
 #include <string>
+#include <cstdint>
 #include "ConfigReader.h"
+
+
 
 namespace cr
 {
 namespace templ
 {
 
-struct TemplateParamsMask
-{
+
+
+/**
+ * @brief Mask for template library params for encoding (serializing).
+ */
+typedef struct TemplateLibraryParamsMask {
     bool firstParam{ true };
     bool secondParam{ true };
     bool thirdParam{ true };
-};
+} TemplateLibraryParamsMask;
 
 
-class TemplateParams
+
+/**
+ * @brief Class of template library parameters.
+ */
+class TemplateLibraryParams
 {
 public:
-    /// First template param. Here describe what status does this flag define.
+
+    /// First param. Here describe what status does this flag define.
     bool firstParam{ false };
-    /// Second template param. Here describe what number does it store and what is the range.
+    /// Second param. Here describe nuances and param value vaid range.
     int secondParam{ 0 };
-    /// Third template param. Here describe what number does it store and what is the range and why float.
+    /// Third param. Here describe nuances and param value vaid range.
     float thirdParam{ 0.0f };
 
-    JSON_READABLE(TemplateParams, firstParam, secondParam, thirdParam)
+    /// Macro from ConfigReader to make params readable/writable from JSON.
+    JSON_READABLE(TemplateLibraryParams, firstParam, secondParam, thirdParam)
 
-        /// operator =
-        TemplateParams& operator= (const TemplateParams& src);
+    /// operator =
+    TemplateLibraryParams& operator= (const TemplateLibraryParams& src);
 
-    /// Encode params.
+    /**
+     * @brief Encode (serialize) params.
+     * @param data Pointer to buffer to store serialized params.
+     * @param  bufferSize Size of buffer.
+     * @param size Size of encoded (serialized) data. Will be <= bufferSize.
+     * @param mask Pointer to mask structure. Used to exclude particular
+     * params from encoding (from serialization).
+     * @return TRUE if params ecnoded (serialized) or FALSE if:
+     * 1. bufferSize less tha size of serialized params.
+     * 2. Can be other errors depends on implementation.
+     */
     bool encode(uint8_t* data, int bufferSize, int& size,
-        TemplateParamsMask* mask = nullptr);
+                TemplateLibraryParamsMask* mask = nullptr);
 
-    /// Decode params.
+    /**
+     * @brief Decode (deserialize) params.
+     * @param data Pointer to buffer with encoded (serialized) params.
+     * @param dataSize Size of encoded (serialized) params.
+     * @return TRUE if params decoded, FALSE otherwise.
+     */
     bool decode(uint8_t* data, int dataSize);
 };
 
 
-enum class TemplateParam
+
+/**
+ * @brief Enum of template library params.
+ */
+enum class TemplateLibraryParam
 {
-    /// First template param.
+    /// First param. Here describe nuances and param value vaid range.
     FIRST_PARAM = 1,
-    /// Second template param.
+    /// Second param. Here describe nuances and param value vaid range.
     SECOND_PARAM,
-    /// Third template param.
+    /// Third param. Here describe nuances and param value vaid range.
     THIRD_PARAM
 };
 
-enum class TemplateCommand
+
+
+/**
+ * @brief Enum of template library commands.
+ */
+enum class TemplateLibraryCommand
 {
     /// First command.
     FIRST_COMMAND = 1,
@@ -58,54 +95,73 @@ enum class TemplateCommand
     THIRD_COMMAND
 };
 
+
+
 /**
- * @brief The TemplateLibrary class provides a template library with various functionalities.
+ * @brief Library template class with various methods.
  */
 class TemplateLibrary {
 public:
+
     /**
-     * @brief Constructor for the TemplateLibrary class.
+     * @brief Class constructor.
      */
     TemplateLibrary();
 
     /**
-     * @brief Destructor for the TemplateLibrary class.
+     * @brief Class destructor.
      */
     ~TemplateLibrary();
 
     /**
      * @brief Get the version of the TemplateLibrary class.
-     * @return A string representing the version.
+     * @return A string representing the version: "Major.Minor.Patch"
      */
     static std::string getVersion();
 
     /**
-     * @brief Set the value for a specific template parameter.
-     * @param id The identifier of the template parameter.
+     * @brief Set the value for a specific library parameter.
+     * @param id The identifier of the library parameter.
      * @param value The value to set for the parameter.
-     * @return True if the parameter was successfully set, false otherwise.
+     * @return TRUE if the parameter was successfully set, FALSE otherwise.
      */
-    bool setParam(TemplateParam id, float value);
+    bool setParam(TemplateLibraryParam id, float value);
 
     /**
-     * @brief Get the value of a specific template parameter.
-     * @param id The identifier of the template parameter.
+     * @brief Get the value of a specific library parameter.
+     * @param id The identifier of the library parameter.
      * @return The value of the specified parameter.
      */
-    float getParam(TemplateParam id);
+    float getParam(TemplateLibraryParam id);
 
     /**
-     * @brief Get the structure containing all template parameters.
-     * @param params Reference to a TemplateParams structure to store the parameters.
+     * @brief Get the structure containing all library parameters.
+     * @param params Reference to a TemplateParams structure.
      */
-    void getParams(TemplateParams& params);
+    void getParams(TemplateLibraryParams& params);
 
     /**
      * @brief Execute a template command.
-     * @param id The identifier of the template command to be executed.
-     * @return True if the command was executed successfully, false otherwise.
+     * @param id The identifier of the library command to be executed.
+     * @return TRUE if the command was executed successfully, FALSE otherwise.
      */
-    bool executeCommand(TemplateCommand id);
+    bool executeCommand(TemplateLibraryCommand id);
+
+    /**
+     * @brief Any useful method of library.
+     * @param value Output value.
+     * @return TRUE of success, FALSE otherwise.
+     */
+    bool doSomething(int& value);
+
+private:
+
+    /// Library parameters structure.
+    TemplateLibraryParams m_params;
+    /// Any private variable.
+    int m_variable{ 0 };
 };
+
+
 }
 }

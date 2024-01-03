@@ -20,21 +20,27 @@
   - [getParam method](#getParam-method)
   - [getParams method](#getParams-method)
   - [executeCommand method](#executeCommand-method)
+  - [doSomething method](#doSomething-method)
 - [Data structures](#Data-structures)
-  - [TemplateCommand enum](#TemplateCommand-enum)
-  - [TemplateParam enum](#TemplateParam-enum)
-- [TemplateParams class description](#TemplateParams-class-description)
+  - [TemplateLibraryCommand enum](#TemplateLibraryCommand-enum)
+  - [TemplateLibraryParam enum](#TemplateLibraryParam-enum)
+- [TemplateLibraryParams class description](#TemplateLibraryParams-class-description)
   - [Class declaration](#Class-declaration)
   - [Serialize template params](#Serialize-template-params)
   - [Deserialize template params](#Deserialize-template-params)
   - [Read params from JSON file and write to JSON file](#Read-params-from-JSON-file-and-write-to-JSON-file)
 - [Build and connect to your project](#Build-and-connect-to-your-project)
+- [Example](#Example)
 
 
 
 # Overview
 
-**TemplateLibrary** C++ library provides standard interface as well defines data structures and rules to stand as an example for other repositories in ConstantRobotics's RapidPixel SDK. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories.
+**TemplateLibrary** C++ library is a example of library structure. As well defines data structures and rules to stand as an example for other repositories. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories. This library as example depends on open source [**ConfigReader**](https://github.com/ConstantRobotics-Ltd/ConfigReader) library which provides methods to work with JSON files.
+
+Overview section must include explanation of library purpose, C++ standard, important dependencies and main features. This text will be used for publishing on web site. Provide enough information so that the user can immediately understand the purpose of the library and its compatibility with their project.
+
+
 
 # Versions
 
@@ -55,18 +61,18 @@ CMakeLists.txt ------------------- Main CMake file of the library.
 3rdparty ------------------------- Folder with third-party libraries.
     CMakeLists.txt --------------- CMake file which includes third-party libraries.
     ConfigReader ----------------- Source code of the ConfigReader library.
-example -------------------------- Folder with the simplest example of TemplateLibrary usage.
+example -------------------------- Folder with the simplest example of library usage.
     CMakeLists.txt --------------- CMake file for simple example.
     main.cpp --------------------- Source code file of simple example application.
-test ----------------------------- Folder for internal tests of TemplateLibrary.
-    CMakeLists.txt --------------- CMake file for codec test application.
-    main.cpp --------------------- Source code file of TemplateLibrary class test application.
+test ----------------------------- Folder for internal tests of library.
+    CMakeLists.txt --------------- CMake file for tests application.
+    main.cpp --------------------- Source code file tests application.
 src ------------------------------ Folder with source code of the library.
     CMakeLists.txt --------------- CMake file of the library.
-    TemplateLibrary.cpp ------------------- Source code file of the library.
-    TemplateLibrary.h --------------------- Header file which includes TemplateLibrary class declaration.
-    TemplateLibraryVersion.h -------------- Header file which includes version of the library.
-    TemplateLibraryVersion.h.in ----------- CMake service file to generate version file.
+    TemplateLibrary.cpp ---------- Source code file of the library.
+    TemplateLibrary.h ------------ Header file which includes TemplateLibrary class declaration.
+    TemplateLibraryVersion.h ----- Header file which includes version of the library.
+    TemplateLibraryVersion.h.in -- CMake service file to generate version file.
 ```
 
 
@@ -80,29 +86,31 @@ src ------------------------------ Folder with source code of the library.
 **TemplateLibrary** interface class declared in **TemplateLibrary.h** file. Class declaration:
 
 ```cpp
-class TemplateLibrary
-{
+class TemplateLibrary {
 public:
-    /// Class destructor.
+    /// Class constructor.
     TemplateLibrary();
-    
+
     /// Class destructor.
     ~TemplateLibrary();
 
-    /// Get TemplateLibrary class version.
+    /// Get the version of the TemplateLibrary class.
     static std::string getVersion();
-    
-    /// Set the template param.
-    bool setParam(TemplateParam id, float value);
-    
-    /// Get the template param.
-    float getParam(TemplateParam id);
-    
-    /// Get the template params structure.
-    void getParams(TemplateParams& params);
-    
-    /// Execute template command.
-    bool executeCommand(TemplateCommand id);
+
+    /// Set the value for a specific library parameter.
+    bool setParam(TemplateLibraryParam id, float value);
+
+    /// Get the value of a specific library parameter.
+    float getParam(TemplateLibraryParam id);
+
+    /// Get the structure containing all library parameters.
+    void getParams(TemplateLibraryParams& params);
+
+    /// Execute a template command.
+    bool executeCommand(TemplateLibraryCommand id);
+
+    /// Any useful method of library.
+    bool doSomething(int& value);
 };
 ```
 
@@ -132,16 +140,16 @@ TemplateLibrary class version: 1.0.0
 
 ## setParam method
 
-**setParam(...)** method sets new template parameters value. Every implementation of library with parameters have to provide thread-safe **setParam(...)** method call. This means that the **setParam(...)** method can be safely called from any thread. Method declaration:
+**setParam(...)** method sets new parameters value. Every implementation of library with parameters have to provide thread-safe **setParam(...)** method call. This means that the **setParam(...)** method can be safely called from any thread. Method declaration:
 
 ```cpp
-bool setParam(TemplateParam id, float value);
+bool setParam(TemplateLibraryParam id, float value);
 ```
 
 | Parameter | Description                                                  |
 | --------- | ------------------------------------------------------------ |
-| id        | Template parameter ID according to TemplateParam enum (see description of **TemplateParam** enum). |
-| value     | Template parameter value. Value depends on parameter ID (see description of **TemplateParam** enum). |
+| id        | Parameter ID according to [TemplateLibraryParam](#TemplateLibraryParam-enum) enum. |
+| value     | Parameter value. Value depends on parameter ID.              |
 
 **Returns:** TRUE if the parameter was set or FALSE if not.
 
@@ -149,15 +157,15 @@ bool setParam(TemplateParam id, float value);
 
 ## getParam method
 
-**getParam(...)** method returns template parameter value. Every implementation of library with parameters have to provide thread-safe getParam(...)** method call. This means that the **getParam(...)** method can be safely called from any thread. Method declaration:
+**getParam(...)** method returns parameter value. Every implementation of library with parameters have to provide thread-safe **getParam(...)** method call. This means that the **getParam(...)** method can be safely called from any thread. Method declaration:
 
 ```cpp
-float getParam(TemplateParam id);
+float getParam(TemplateLibraryParam id);
 ```
 
 | Parameter | Description                                                  |
 | --------- | ------------------------------------------------------------ |
-| id        | Template parameter ID according to TemplateParam enum (see description of [**TemplateParam enum**](#TemplateParam-enum)). |
+| id        | Parameter ID according to [TemplateLibraryParam](#TemplateLibraryParam-enum) enum. |
 
 **Returns:** parameter value or **-1** if the parameters doesn't exist.
 
@@ -165,15 +173,47 @@ float getParam(TemplateParam id);
 
 ## getParams method
 
-**getParams(...)** method is designed to obtain template parameters. Every implementation of library with parameters have to provide thread-safe **getParams(...)** method call. This means that the **getParams(...)** method can be safely called from any thread. Method declaration:
+**getParams(...)** method is designed to obtain params structure. Every implementation of library with parameters have to provide thread-safe **getParams(...)** method call. This means that the **getParams(...)** method can be safely called from any thread. Method declaration:
 
 ```cpp
-void getParams(TemplateParams& params);
+void getParams(TemplateLibraryParams& params);
 ```
 
-| Parameter | Description                                         |
-| --------- | --------------------------------------------------- |
-| params    | Reference to TemplateParams object to store params. |
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| params    | Reference to [TemplateLibraryParams](#TemplateLibraryParams-class-description) object to store params. |
+
+
+
+## doSomething method
+
+**doSomething(...)** does something. Method declaration:
+
+```cpp
+bool doSomething(int& value);
+```
+
+| Parameter | Description                |
+| --------- | -------------------------- |
+| value     | Reference to output value. |
+
+**Returns:** TRUE if the library did something or FALSE if not.
+
+
+
+## executeCommand method
+
+**executeCommand(...)** method executes library command. Every implementation of library with parameters have to provide thread-safe **executeCommand(...)** method call. This means that the **executeCommand(...)** method can be safely called from any thread. Method declaration:
+
+```cpp
+bool executeCommand(TemplateLibraryCommand id);
+```
+
+| Parameter | Description                                                  |
+| --------- | ------------------------------------------------------------ |
+| id        | Command  ID according to [TemplateLibraryCommand](#TemplateLibraryCommand-enum) enum. |
+
+**Returns:** TRUE if the command executed or FALSE if not.
 
 
 
@@ -181,12 +221,12 @@ void getParams(TemplateParams& params);
 
 
 
-## TemplateCommand enum
+## TemplateLibraryCommand enum
 
 Enum declaration:
 
 ```cpp
-enum class TemplateCommand
+enum class TemplateLibraryCommand
 {
     /// First command.
     FIRST_COMMAND = 1,
@@ -197,7 +237,7 @@ enum class TemplateCommand
 };
 ```
 
-**Table 2** - Template commands description.
+**Table 2** - Commands description.
 
 | Command        | Description                   |
 | -------------- | ----------------------------- |
@@ -207,66 +247,68 @@ enum class TemplateCommand
 
 
 
-## TemplateParam enum
+## TemplateLibraryParam enum
 
 Enum declaration:
 
 ```cpp
-enum class TemplateParam
+enum class TemplateLibraryParam
 {
-    /// First template param.
+    /// First param. Here describe nuances and param value vaid range.
     FIRST_PARAM = 1,
-    /// Second template param.
+    /// Second param. Here describe nuances and param value vaid range.
     SECOND_PARAM,
-    /// Third template param.
+    /// Third param. Here describe nuances and param value vaid range.
     THIRD_PARAM
 };
 ```
 
-**Table 3** - Template params description.
+**Table 3** - Params description.
 
-| Parameter    | Access       | Description            |
-| ------------ | ------------ | ---------------------- |
-| FIRST_PARAM  | read / write | First template param.  |
-| SECOND_PARAM | read / write | Second template param. |
-| THIRD_PARAM  | read / write | Third template param.  |
+| Parameter    | Access       | Description                                                  |
+| ------------ | ------------ | ------------------------------------------------------------ |
+| FIRST_PARAM  | read / write | First param. Valid values **0** or **1**:<br />**0** - set to set firstParam of TempleLibraryParams class to **false**.<br />**1** - set to set firstParam of TempleLibraryParams class to **true**. |
+| SECOND_PARAM | read / write | Second param. Valid values from **-100** to **100**.         |
+| THIRD_PARAM  | read / write | Third param. Valid values from **-100** to **100**.          |
 
-# TemplateParams class description
 
-**TemplateParams** class is used  to provide example params structure. Also **TemplateParams** provide possibility to write/read params from JSON files (**JSON_READABLE** macro) and provide methods to encode and decode params.
+
+# TemplateLibraryParams class description
 
 
 
 ## Class declaration
 
-**TemplateParams** interface class declared in **TemplateLibrary.h** file. Class declaration:
+**TemplateLibraryParams** class is used to provide example params structure. Also **TemplateLibraryParams** provides possibility to write/read params from JSON files (**JSON_READABLE** macro) and provides methods to encode and decode params. **TemplateLibraryParams** interface class declared in **TemplateLibrary.h** file. Class declaration:
 
 ```cpp
-class TemplateParams
+class TemplateLibraryParams
 {
 public:
-    /// First template param.
+
+    /// First param. Here describe what status does this flag define.
     bool firstParam{ false };
-    /// Second template param.
+    /// Second param. Here describe nuances and param value vaid range.
     int secondParam{ 0 };
-    /// Third template param.
+    /// Third param. Here describe nuances and param value vaid range.
     float thirdParam{ 0.0f };
 
-    JSON_READABLE(TemplateParams, firstParam, secondParam, thirdParam)
+    /// Macro from ConfigReader to make params readable/writable from JSON.
+    JSON_READABLE(TemplateLibraryParams, firstParam, secondParam, thirdParam)
 
     /// operator =
-    TemplateParams& operator= (const TemplateParams& src);
+    TemplateLibraryParams& operator= (const TemplateLibraryParams& src);
 
-    /// Encode params.
+    /// Encode (serialize) params.
     bool encode(uint8_t* data, int bufferSize, int& size,
-                TemplateParamsMask* mask = nullptr);
+                TemplateLibraryParamsMask* mask = nullptr);
 
-    /// Decode params.
+    /// Decode (deserialize) params.
     bool decode(uint8_t* data, int dataSize);
 };
 ```
 
-**Table 4** - TemplateParams class fields description is related to [**TemplateParam enum**](#TemplateParam -enum) description.
+**Table 4** - TemplateLibraryParams class fields description is related to [TemplateLibraryParam enum](#TemplateLibraryParam-enum) description.
 
 | Field       | type  | Description            |
 | ----------- | ----- | ---------------------- |
@@ -280,10 +322,10 @@ public:
 
 ## Serialize template params
 
-[**TemplateParams class**](#TemplateParams -class-description) provides method **encode(...)** to serialize template params (fields of [**TemplateParams class**](#TemplateParams -class-description), see Table 4). Serialization of template params necessary in case when you have to send template params via communication channels. Method provides options to exclude particular parameters from serialization. To do this method inserts binary mask (8 bytes) where each bit represents particular parameter and **decode(...)** method recognizes it. Method declaration:
+[TemplateLibraryParams](#TemplateLibraryParams-class-description) class provides method **encode(...)** to serialize template params. Serialization of template params necessary in case when you have to send template params via communication channels. Method provides options to exclude particular parameters from serialization. To do this method inserts binary mask (1 byte) where each bit represents particular parameter and **decode(...)** method recognizes it. Method declaration:
 
 ```cpp
-bool encode(uint8_t* data, int bufferSize, int& size, TemplateParamsMask* mask = nullptr);
+bool encode(uint8_t* data, int bufferSize, int& size, TemplateLibraryParamsMask* mask = nullptr);
 ```
 
 | Parameter  | Value                                                        |
@@ -291,93 +333,105 @@ bool encode(uint8_t* data, int bufferSize, int& size, TemplateParamsMask* mask =
 | data       | Pointer to data buffer. Buffer size must be >= 237 bytes.    |
 | bufferSize | Data buffer size. Buffer size must be >= 237 bytes.          |
 | size       | Size of encoded data.                                        |
-| mask       | Parameters mask - pointer to **TemplateParamsMask** structure. **TemplateParamsMask** (declared in TemplateLibrary.h file) determines flags for each field (parameter) declared in [**TemplateParams class**](#TemplateParams-class-description). If the user wants to exclude any parameters from serialization, he can put a pointer to the mask. If the user wants to exclude a particular parameter from serialization, he should set the corresponding flag in the **TemplateParamsMask** structure. |
+| mask       | Parameters mask - pointer to **TemplateLibraryParamsMask** structure. **TemplateLibraryParamsMask** (declared in TemplateLibrary.h file) determines flags for each field (parameter) declared in [TemplateLibraryParams class](#TemplateLibraryParams-class-description). If the user wants to exclude any parameters from serialization, he can put a pointer to the mask. If the user wants to exclude a particular parameter from serialization, he should set the corresponding flag in the **TemplateLibraryParamsMask** structure. |
 
 **Returns:** TRUE if params encoded (serialized) or FALSE if not.
 
-**TemplateParamsMask** structure declaration:
+**TemplateLibraryParamsMask** structure declaration:
 
 ```cpp
-struct TemplateParamsMask
-{
+typedef struct TemplateLibraryParamsMask {
     bool firstParam{ true };
     bool secondParam{ true };
     bool thirdParam{ true };
-};
+} TemplateLibraryParamsMask;
 ```
 
 Example without parameters mask:
 
 ```cpp
-// Encode data.
-TemplateParams in;
-in.profile = 10;
-uint8_t data[1024];
+// Prepare random params.
+cr::templ::TemplateLibraryParams params1;
+params1.firstParam = true;
+params1.secondParam = rand() % 255;
+params1.thirdParam = static_cast<float>(rand() % 255);
+
+// Encode (serialize) params.
+int bufferSize = 128;
+uint8_t buffer[128];
 int size = 0;
-in.encode(data, 1024, size);
-std::cout << "Encoded data size: " << size << " bytes" << std::endl;
+params1.encode(buffer, bufferSize, size);
 ```
 
 Example with parameters mask:
 
 ```cpp
-// Prepare params.
-TemplateParams in;
-in.profile = 3;
+// Prepare random params.
+cr::templ::TemplateLibraryParams params1;
+params1.firstParam = true;
+params1.secondParam = rand() % 255;
+params1.thirdParam = static_cast<float>(rand() % 255);
 
 // Prepare mask.
-TemplateParamsMask mask;
-mask.profile = false; // Exclude profile. Others by default.
+cr::templ::TemplateLibraryParamsMask mask;
+mask.firstParam = false;
+mask.secondParam = true; // Include only one param fr encoding.
+mask.thirdParam = false;
 
-// Encode.
-uint8_t data[1024];
+// Encode (serialize) params.
+int bufferSize = 128;
+uint8_t buffer[128];
 int size = 0;
-in.encode(data, 1024, size, &mask);
-cout << "Encoded data size: " << size << " bytes" << endl;
+params1.encode(buffer, bufferSize, size, &mask);
 ```
 
 
 
 ## Deserialize template params
 
-[**TemplateParams class**](#TemplateParams-class-description) provides method **decode(...)** to deserialize template params (fields of TemplateParams class, see Table 4). Deserialization of template params necessary in case when you need to receive params via communication channels. Method automatically recognizes which parameters were serialized by **encode(...)** method. Method declaration:
+[TemplateLibraryParams](#TemplateLibraryParams-class-description) class provides method **decode(...)** to deserialize params. Deserialization of template params necessary in case when you need to receive params via communication channels. Method automatically recognizes which parameters were serialized by **encode(...)** method. Method declaration:
 
 ```cpp
 bool decode(uint8_t* data, int dataSize);
 ```
 
-| Parameter | Value                                                   |
-| --------- | ------------------------------------------------------- |
-| data      | Pointer to data buffer with serialized template params. |
-| dataSize  | Size of command data.                                   |
+| Parameter | Value                                          |
+| --------- | ---------------------------------------------- |
+| data      | Pointer to data buffer with serialized params. |
+| dataSize  | Size of command data.                          |
 
 **Returns:** TRUE if params decoded (deserialized) or FALSE if not.
 
 Example:
 
 ```cpp
-// Encode data.
-TemplateParams in;
-uint8_t data[1024];
-int size = 0;
-in.encode(data, 1024, size);
-cout << "Encoded data size: " << size << " bytes" << endl;
+// Prepare random params.
+cr::templ::TemplateLibraryParams params1;
+params1.firstParam = true;
+params1.secondParam = rand() % 255;
+params1.thirdParam = static_cast<float>(rand() % 255);
 
-// Decode data.
-TemplateParams out;
-if (!out.decode(data, size))
-    cout << "Can't decode data" << endl;
+// Encode (serialize) params.
+int bufferSize = 128;
+uint8_t buffer[128];
+int size = 0;
+params1.encode(buffer, bufferSize, size);
+
+// Decode (deserialize) params.
+cr::templ::TemplateLibraryParams params2;
+params2.decode(buffer, size);
 ```
 
 
 
 ## Read params from JSON file and write to JSON file
 
-**TemplateLibrary** depends on [**ConfigReader**](https://github.com/ConstantRobotics-Ltd/ConfigReader) library which provides method to read params from JSON file and to write params to JSON file. Example of writing and reading params to JSON file:
+**TemplateLibrary** depends on open source [**ConfigReader**](https://github.com/ConstantRobotics-Ltd/ConfigReader) library which provides method to read params from JSON file and to write params to JSON file. Example of writing and reading params to JSON file:
 
 ```cpp
 // Write params to file.
 cr::utils::ConfigReader inConfig;
+cr::templ::TemplateLibraryParams in;
 inConfig.set(in, "templateParams");
 inConfig.writeToFile("TestTemplateParams.json");
 
@@ -394,7 +448,7 @@ if(!outConfig.readFromFile("TestTemplateParams.json"))
 
 ```json
 {
-    "templateParams": 
+    "templateParams":
     {
         "firstParam": true,
         "secondParam": 1
@@ -516,3 +570,62 @@ target_link_libraries(${PROJECT_NAME} TemplateLibrary)
 ```
 
 Done!
+
+
+
+# Example
+
+Simple example shows how to use library.
+
+```cpp
+#include <iostream>
+#include "TemplateLibrary.h"
+
+int main(void)
+{
+	// Create library object.
+	cr::templ::TemplateLibrary lib;
+
+	// Set params.
+	lib.setParam(cr::templ::TemplateLibraryParam::FIRST_PARAM, 1.0f);
+	lib.setParam(cr::templ::TemplateLibraryParam::SECOND_PARAM, 2.0f);
+	lib.setParam(cr::templ::TemplateLibraryParam::THIRD_PARAM, 2.0f);
+
+	// Display params.
+	std::cout << lib.getParam(cr::templ::TemplateLibraryParam::FIRST_PARAM) << std::endl;
+	std::cout << lib.getParam(cr::templ::TemplateLibraryParam::SECOND_PARAM) << std::endl;
+	std::cout << lib.getParam(cr::templ::TemplateLibraryParam::THIRD_PARAM) << std::endl;
+
+	// Execute commands.
+	lib.executeCommand(cr::templ::TemplateLibraryCommand::FIRST_COMMAND);
+	lib.executeCommand(cr::templ::TemplateLibraryCommand::SECOND_COMMAND);
+	lib.executeCommand(cr::templ::TemplateLibraryCommand::THIRD_COMMAND);
+
+	// Get params.
+	cr::templ::TemplateLibraryParams params;
+	lib.getParams(params);
+
+	// Display params.
+	std::cout << std::string(params.firstParam ? "true" : "false") << std::endl;
+	std::cout << params.secondParam << std::endl;
+	std::cout << params.thirdParam << std::endl;
+
+	// Do something.
+	std::cout << "Do something:" << std::endl;
+	for (int i = 0; i < 10; ++i)
+	{
+		int value = 0;
+		lib.doSomething(value);
+		std::cout << "Value: " << value << std::endl;
+	}
+
+	return 0;
+}
+```
+
+
+
+
+
+
+
