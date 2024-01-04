@@ -8,22 +8,22 @@
 
 # Table of contents
 
-- [Overview](# Overview)
-- [Versions](# Versions)
-- [Coding Guide](# Coding Guide)
-  - [General rules](## General rules)
-  - [Style](## Style)
-    - [Naming](### Naming)
-    - [Composition](### Composition)
-    - [Documentation](### Documentation)
-    - [Good practices](### Good practices)
-  - [Memory Management](## Memory Management)
-  - [Code Management](## Code Management)
-    - [Commits](### Commits)
-    - [Branches](### Branches)
-    - [Pull-requests](### Pull-requests)
+- [Overview](#Overview)
+- [Versions](#Versions)
+- [Coding Guide](#Coding Guide)
+  - [General rules](##General rules)
+  - [Style](##Style)
+    - [Naming](###Naming)
+    - [Composition](###Composition)
+    - [Documentation](###Documentation)
+    - [Good practices](###Good practices)
+  - [Memory Management](##Memory Management)
+  - [Code Management](##Code Management)
+    - [Commits](###Commits)
+    - [Branches](###Branches)
+    - [Pull-requests](###Pull-requests)
 
-- [Resources](# Resources)
+- [Resources](#Resources)
 
 
 
