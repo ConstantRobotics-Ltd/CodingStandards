@@ -1,4 +1,4 @@
-![logo](_static\standards_web_logo.png)
+![logo](_static/standards_web_logo.png)
 
 
 
