@@ -51,6 +51,15 @@ The main point of coding guide is to provide a set of main rules that will be fu
 
 
 
+## General rules
+
+1. Follow the 'Boy Scout Rule'. Always leave the code cleaner than you found it.
+2. Everything you write have to be compatible with [C++ 17](https://en.cppreference.com/w/cpp/17). Any departure from this principle have to be clearly mentioned in repository's documentation.
+3. Always include "README.md" file to the repository.
+4. If there is a chance that your class will be used as a base class, always keep destructor virtual.
+5. No destructor is always better when it’s the correct thing to do. If you dont need destructor, dont define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three).
+6. When you define a destructor in a class, it's important to also explicitly define or delete all constructors and assignment operators. This ensures proper management of resources, as the compiler's implicit versions may not handle resource management correctly. This rule is known as [Rule of three (until C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three) or [Rule of five (after C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three)
+
 ## Style
 
 Consistency is the most important aspect of style. The second most important aspect is following a style that the average C++ programmer is used to reading. C++ allows for arbitrary-length identifier names, so there's no reason to be terse when naming things. Use descriptive names, and be consistent in the style.
