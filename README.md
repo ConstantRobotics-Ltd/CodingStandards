@@ -151,15 +151,12 @@ Consistency is the most important aspect of style. The second most important asp
 ```c++
    #pragma once
    
-   namespace cr
-   {
-   namespace temp
+   namespace cr::temp
    {
    class TempClass
    {
        TempClass();
    };
-   }
    }
 ```
 5. Always initialize variables. Initialize variables with curly brackets to avoid narrowing chosen value:
