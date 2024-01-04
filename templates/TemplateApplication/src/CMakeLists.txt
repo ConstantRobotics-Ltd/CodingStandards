@@ -42,4 +42,4 @@ endif()
 ## LINK LIBRARIES
 ## linking all dependencies
 ################################################################################
-target_link_libraries(${PROJECT_NAME} TemplateLibrary)
+target_link_libraries(${PROJECT_NAME} ConfigReader)

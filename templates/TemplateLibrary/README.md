@@ -40,6 +40,23 @@
 
 Overview section must include explanation of library purpose, C++ standard, important dependencies and main features. This text will be used for publishing on web site. Provide enough information so that the user can immediately understand the purpose of the library and its compatibility with their project.
 
+Generally any library repository should have following structure:
+
+``` xml
+3rdparty ------------- Folder with third-party libraries (dependencies)
+    Submodule1 ------- Third-party library folder.
+    Submodule2 ------- Third-party library folder.
+    CMakeLists.txt --- CMake file to include third-party libraries.
+demo ----------------- Demo appllication folder.
+example -------------- Simple example folder, which uses in documentation.
+src ------------------ Source code folder.
+test ----------------- Forlder for tests.
+_static -------------- Folder with images for documentation.
+.gitignore ----------- File to exclude particular files/folders from repository.
+CMakeLists.txt ------- Main CMake file.
+README.md ------------ Documentation.
+```
+
 
 
 # Versions
