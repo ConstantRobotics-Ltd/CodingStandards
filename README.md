@@ -8,24 +8,22 @@
 
 # Table of contents
 
-- [Overview](#Overview)
-- [Repository Structure](#Repository Structure)
-	- [demo](#demo)
-	- [example](#example)
-	- [src](#src)
-	- [test](#test)
-- [Coding Guide](#Coding Guide)
-  - [Style](##Style)
-    - [Naming](###Naming)
-    - [Composition](#Composition)
-    - [Documentation](#Documentation)
-    - [Good practices](###Good-practices)
-  - [Memory Management](##Memory-Management)
-  - [Code Management](##Code-Management)
-  	- [Commits](###Commits)
-  	- [Branches](###Branches)
-  	- [Pull-requests](###Pull-requests)
-- [Resources](#Resources)
+- [Overview](# Overview)
+- [Versions](# Versions)
+- [Coding Guide](# Coding Guide)
+  - [General rules](## General rules)
+  - [Style](## Style)
+    - [Naming](### Naming)
+    - [Composition](### Composition)
+    - [Documentation](### Documentation)
+    - [Good practices](### Good practices)
+  - [Memory Management](## Memory Management)
+  - [Code Management](## Code Management)
+    - [Commits](### Commits)
+    - [Branches](### Branches)
+    - [Pull-requests](### Pull-requests)
+
+- [Resources](# Resources)
 
 
 
@@ -41,7 +39,7 @@ This is ConstantRobotics' Coding Standards document. This guide outlines essenti
 
 | Version | Release date | What's new                                                   |
 | ------- | ------------ | ------------------------------------------------------------ |
-| 1.0.0   | 04.01.2024   | First version of standard which includes:<br />- Style guide.<br />- Memory management guide.<br />- Templates for library and application with documentation guide.<br />- List of resources. |
+| 1.0.0   | 04.01.2024   | First version of standards, which includes:<br />- Style guide.<br />- Memory management guide.<br />- Templates for library and application with documentation guide.<br />- List of resources. |
 
 
 
@@ -62,25 +60,25 @@ The main point of coding guide is to provide a set of main rules that will be fu
 
 ## Style
 
-Consistency is the most important aspect of style. The second most important aspect is following a style that the average C++ programmer is used to reading. C++ allows for arbitrary-length identifier names, so there's no reason to be terse when naming things. Use descriptive names, and be consistent in the style.
+Consistency is the most important aspect of style. The second most important aspect is following a style, that the average C++ programmer is used to reading. C++ allows for arbitrary-length identifier names, so there's no reason to be terse when naming things. Use descriptive names and be consistent in the style.
 
 ### Naming
 
-1. Use **PascalCase** for naming: a class, an enum class or a struct, e.g. - *'TemplateLibrary'*.
+1. Use **PascalCase** for naming: a class, an enum class or a struct, e.g. - `TemplateLibrary`.
 
-2. Use **camelCase** for naming: a local variable, function or a method, e.g. - *'setParam()'*.
+2. Use **camelCase** for naming: a local variable, function or a method, e.g. - `setParam()`.
 
-3. Use **upper case with underscores** for naming: a constant, e.g. - *'MAX_CONSTANT_VALUE'*.
+3. Use **upper case with underscores** for naming: a constant, e.g. - `MAX_CONSTANT_VALUE`.
 
-4. Distinguish private class field with a *'m_'* prefix, e.g. - *'m_frameWidth'*(*'m_'* stands for "member").
+4. Distinguish private class field with a *'m_'* prefix, e.g. - `m_frameWidth` (`m_` stands for "member").
 
-5. Distinguish global variables with a *'g_'* prefix, e.g. - *'g_frameWidth'*.
+5. Distinguish global variables with a *'g_'* prefix, e.g. - `g_frameWidth` (`g_` stands for "global").
 
 6. Don't name anything starting with underscore *'_'*.
 
 ### Composition
 
-1. Comment blocks should use `//`, not `/* */`. `/* */` is reserved for documentation in header file only.
+1. In comment blocks use `//`, not `/* */`. `/* */` is reserved for documentation in header file only.
 
 2. Strive to strike a balance in commenting your code - while it is crucial to provide sufficient comments for clarity and understanding, aim to keep them concise and focused, avoiding unnecessary verbosity to maintain code readability and promote efficient collaboration, e.g. - 
   ```c++
@@ -92,7 +90,7 @@ Consistency is the most important aspect of style. The second most important asp
     // Check if energy was calculated.
     if (energy.isCalculated()) {}
   ```
-3. Curly brackets *'{}'* are **required** for blocks. It costs you nothing, but can cost a lot of time for someone changing code after you, e.g. 
+3. Curly brackets `{}` are **required** for blocks. It costs you nothing, but can cost a lot of time for someone changing code after you, e.g. 
   ```c++
     // Bad Idea
     // This compiles and does what you want, but can lead to confusing
@@ -121,12 +119,12 @@ Consistency is the most important aspect of style. The second most important asp
   ```
 
 5. Keep lines a reasonable length. In header files do not cross length of **80** characters.
-6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add *'cr::image'* if there is already *'cr::frame'*.
+6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add `cr::image` if there is already `cr::frame`.
 7. Keep 3-lines space between each method or function body.
 
 ### Documentation
 
-1. Each class, method, field, function has to have descriptive documentation written as a comment in header file.
+1. Each class, method, field or function has to have descriptive documentation written as a comment in the header file.
 
 2. Use `/* */` only for documentation, e.g. -
    ```c++
@@ -143,13 +141,13 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Good practices
 
-1. Use *'nullptr'* to indicate a null pointer. Not NULL nor 0.
+1. Use `nullptr` to indicate a null pointer. Not `NULL` nor `0`.
 
-2. **Never** use *'using namespace'* in a header file. Try to avoid also in source C++ files, since it can create name conflicts and ambiguities. [Why is "using namespace" is considered a bad practice.](https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice)
+2. **Never** use `using namespace` in a header file. Try to avoid also in source C++ files, since it can create name conflicts and ambiguities. [Why is `using namespace` is considered a bad practice.](https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice)
 
-3. Apply *'include'* guards to avoid including the same file multiple times. Use *'#pragma once'*.
+3. Apply `include` guards to avoid including the same file multiple times. Use `#pragma once`.
 
-4. Always use namespaces while creating new class. All namespaces should be placed in one general namespace *'cr'*.
+4. Always use namespaces while creating new class. All namespaces should be placed in one general namespace `cr`.
 ```c++
    #pragma once
    
@@ -170,9 +168,9 @@ Consistency is the most important aspect of style. The second most important asp
    unsigned valueB{ -1 }; // Narrowing from signed to unsigned not alllowed, compile time error.
    ```
 
-6. When building a class with fields, always initialize member variables in header file, not in constructor.
+6. When building a class with fields, always initialize member variables in header file, not in the constructor.
 
-7. Use C++-style cast instead of C-style cast. Use the C++-style cast (static\_cast<>, dynamic\_cast<> ...) instead of the C-style cast. The C++-style cast allows more compiler checks and is considerably safer. Additionally the C++ cast style is more visible and has the possibility to search for. [Further reading](https://anteru.net/blog/2007/c-background-static-reinterpret-and-c-style-casts/).
+7. Use C++-style cast instead of C-style cast. Use the C++-style cast (`static_cast<>, dynamic_cast<>` ...) instead of the C-style cast. The C++-style cast allows more compiler checks and is considerably safer. Additionally the C++ cast style is more visible and has the possibility to search for. [Further reading](https://anteru.net/blog/2007/c-background-static-reinterpret-and-c-style-casts/).
 
 8. Avoid using macros for constant values. Use constexpr:
    not `#define PI 3.14159;`, 
@@ -188,11 +186,11 @@ Consistency is the most important aspect of style. The second most important asp
   };
   ```
 
-10. Use "override" keyword for all polimorphic member functions, this way compiler will give error if you made mistake while overriding a method. 
+10. Use `override` keyword for all polymorphic member functions, this way compiler will report error if you made mistake while overriding a method. 
   ```cpp
   class Base
   {
-    virtual void foo();
+    virtual void foo() = 0;
   };
 
   class Derived : public Base
@@ -201,9 +199,7 @@ Consistency is the most important aspect of style. The second most important asp
   };
   ```
 
-11. No destructor is always better when it’s the correct thing to do. If you dont need destructor, dont define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
-
-12. Try to avoid using global state. If you can't avoid using them at least try to make them internally linked by using unnamed namespaces.
+11. Try to avoid using global state. If you can't avoid using them at least try to make them internally linked by using unnamed namespaces.
 
 
 
@@ -217,7 +213,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 4. Never return `nullptr` from a function. When a function returns pointer and some condition is not satisfied, just return pointer to the empty value.
 
-5. Shared variables. Use `std::atomic` for basic types. Use `std::mutex` library for operating with shared variables, in cases like parameters class:
+5. Shared variables. Use `std::atomic` for basic types. Use `std::mutex` library for operating with shared variables, in cases like parameters classes:
    ```c++
    std::atomic<bool> templateVariable{ false };
    templateVariable.store(true);
@@ -231,10 +227,6 @@ Consistency is the most important aspect of style. The second most important asp
    ```
 
 6. If semantically correct prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
-
-7. If there is a chance that your class will be used as a base class, always keep destructor virtual.
-
-8. When you define a destructor in a class, it's important to also explicitly define or delete all constructors and assignment operators. This ensures proper management of resources, as the compiler's implicit versions may not handle resource management correctly. This rule is known as [Rule of three (until C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three) or [Rule of five (after C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
 
 
@@ -262,7 +254,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 ### Branches
 
-1. A new branch should be created each time you want to fix something or add a new feature to the master branch.
+1. A new Branch should be created each time you want to fix something or add a new feature to the master Branch.
 2. Connect Branch with Task from Projects board on GitHub. Create name related to Task name.
 3. A Branch should be closed automatically by Pull-request after merge.
 
