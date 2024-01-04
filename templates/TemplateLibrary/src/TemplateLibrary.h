@@ -8,19 +8,15 @@ namespace cr
 {
 namespace templ
 {
-
-
-
 /**
  * @brief Mask for template library params for encoding (serializing).
  */
-typedef struct TemplateLibraryParamsMask {
+struct TemplateLibraryParamsMask
+{
     bool firstParam{ true };
     bool secondParam{ true };
     bool thirdParam{ true };
-} TemplateLibraryParamsMask;
-
-
+};
 
 /**
  * @brief Class of template library parameters.
@@ -31,9 +27,9 @@ public:
 
     /// First param. Here describe what status does this flag define.
     bool firstParam{ false };
-    /// Second param. Here describe nuances and param value vaid range.
+    /// Second param. Here describe nuances and param value valid range.
     int secondParam{ 0 };
-    /// Third param. Here describe nuances and param value vaid range.
+    /// Third param. Here describe nuances and param value valid range.
     float thirdParam{ 0.0f };
 
     /// Macro from ConfigReader to make params readable/writable from JSON.
@@ -49,7 +45,7 @@ public:
      * @param size Size of encoded (serialized) data. Will be <= bufferSize.
      * @param mask Pointer to mask structure. Used to exclude particular
      * params from encoding (from serialization).
-     * @return TRUE if params ecnoded (serialized) or FALSE if:
+     * @return TRUE if params encoded (serialized) or FALSE if:
      * 1. bufferSize less tha size of serialized params.
      * 2. Can be other errors depends on implementation.
      */
@@ -65,22 +61,18 @@ public:
     bool decode(uint8_t* data, int dataSize);
 };
 
-
-
 /**
  * @brief Enum of template library params.
  */
 enum class TemplateLibraryParam
 {
-    /// First param. Here describe nuances and param value vaid range.
+    /// First param. Here describe nuances and param value valid range.
     FIRST_PARAM = 1,
-    /// Second param. Here describe nuances and param value vaid range.
+    /// Second param. Here describe nuances and param value valid range.
     SECOND_PARAM,
-    /// Third param. Here describe nuances and param value vaid range.
+    /// Third param. Here describe nuances and param value valid range.
     THIRD_PARAM
 };
-
-
 
 /**
  * @brief Enum of template library commands.
@@ -95,12 +87,11 @@ enum class TemplateLibraryCommand
     THIRD_COMMAND
 };
 
-
-
 /**
- * @brief Library template class with various methods.
+ * @brief Library template class with template methods.
  */
-class TemplateLibrary {
+class TemplateLibrary
+{
 public:
 
     /**
@@ -132,13 +123,13 @@ public:
      * @param id The identifier of the library parameter.
      * @return The value of the specified parameter.
      */
-    float getParam(TemplateLibraryParam id);
+    float getParam(TemplateLibraryParam id) const;
 
     /**
      * @brief Get the structure containing all library parameters.
      * @param params Reference to a TemplateParams structure.
      */
-    void getParams(TemplateLibraryParams& params);
+    void getParams(TemplateLibraryParams& params) const;
 
     /**
      * @brief Execute a template command.
@@ -150,7 +141,7 @@ public:
     /**
      * @brief Any useful method of library.
      * @param value Output value.
-     * @return TRUE of success, FALSE otherwise.
+     * @return TRUE if success, FALSE otherwise.
      */
     bool doSomething(int& value);
 
@@ -161,7 +152,5 @@ private:
     /// Any private variable.
     int m_variable{ 0 };
 };
-
-
 }
 }

@@ -7,7 +7,9 @@ cr::templ::TemplateLibraryParams &cr::templ::TemplateLibraryParams::operator= (c
 {
 	// Check yourself.
     if (this == &src)
-        return *this;
+	{
+		return *this;
+	}
 
 	// Copy params.
 	firstParam = src.firstParam;
@@ -31,7 +33,9 @@ bool cr::templ::TemplateLibraryParams::encode(uint8_t* data, int bufferSize, int
 	// Prepare params mask.
 	TemplateLibraryParamsMask paramsMask;
 	if (mask != nullptr)
+	{
 		paramsMask = *mask;
+	}
 
 	// Copy atributes.
 	data[0] = 0x02;
@@ -200,21 +204,22 @@ bool cr::templ::TemplateLibrary::setParam(cr::templ::TemplateLibraryParam id, fl
 
 
 
-float cr::templ::TemplateLibrary::getParam(cr::templ::TemplateLibraryParam id)
+float cr::templ::TemplateLibrary::getParam(cr::templ::TemplateLibraryParam id) const
 {
 	switch (id)
 	{
 	case TemplateLibraryParam::FIRST_PARAM:
+	{
 		return m_params.firstParam ? 1.0f : 0.0f;
-
+	}
 	case TemplateLibraryParam::SECOND_PARAM:
+	{
 		return static_cast<float>(m_params.secondParam);
-
+	}
 	case TemplateLibraryParam::THIRD_PARAM:
+	{
 		return m_params.thirdParam;
-
-	default:
-		return -1.0f;
+	}
 	}
 
 	return -1.0f;
@@ -222,7 +227,7 @@ float cr::templ::TemplateLibrary::getParam(cr::templ::TemplateLibraryParam id)
 
 
 
-void cr::templ::TemplateLibrary::getParams(cr::templ::TemplateLibraryParams& params)
+void cr::templ::TemplateLibrary::getParams(cr::templ::TemplateLibraryParams& params) const
 {
 	params = m_params;
 }
