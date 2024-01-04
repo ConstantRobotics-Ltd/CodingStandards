@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 3.13)
 ## EXECUTABLE-PROJECT
 ## name and version
 ################################################################################
-project(TemplateApplication LANGUAGES CXX)
+project(TemplateApplication VERSION 1.0.0 LANGUAGES CXX)
 
 
 
@@ -17,10 +17,15 @@ project(TemplateApplication LANGUAGES CXX)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Enabling export of all symbols to create a dynamic library
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # creating output directory architecture in accordance with GNU guidelines
 set(BINARY_DIR "${CMAKE_BINARY_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${BINARY_DIR}/lib")
+file (GLOB_RECURSE IN_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.h.in)
+configure_file(${IN_FILES} ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}Version.h)
 
 
 

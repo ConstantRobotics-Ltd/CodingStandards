@@ -1,8 +1,14 @@
-# Coding Standards
+![logo](_static\standards_web_logo.png)
+
+
+
+# **Coding Standards**
+
+
 
 # Table of contents
 
-- [Intro](#Intro)
+- [Overview](#Overview)
 - [Repository Structure](#Repository Structure)
 	- [demo](#demo)
 	- [example](#example)
@@ -21,14 +27,29 @@
   	- [Pull-requests](###Pull-requests)
 - [Resources](#Resources)
 
-# Intro
 
-This is Constant Robotics Coding Standards document. This guide outlines essential principles for efficient collaboration, project management, code maintenance, library usage, and readability. By following these guidelines, we aim to boost efficiency, organization, and code quality. Let's work together to create high-quality software while minimizing unnecessary challenges. Thank you for contributing to our cohesive and productive development environment!
+
+# Overview
+
+This is ConstantRobotics' Coding Standards document. This guide outlines essential principles for collaboration, code maintenance, libraries usage, and readability. By following these guidelines, we aim to maintain efficiency, and code quality. As well, this repository provides templates for libraries and applications with documentation example.
+
+
+
+# Versions
+
+**Table 1** - Document versions.
+
+| Version | Release date | What's new                                                   |
+| ------- | ------------ | ------------------------------------------------------------ |
+| 1.0.0   | 04.01.2024   | First version of standard which includes:<br />- Style guide.<br />- Memory management guide.<br />- Templates for library and application with documentation guide.<br />- List of resources. |
+
 
 
 # Coding Guide
 
-The main point of coding guide is to provide a set of rules that will be fundamental in Rapid Pixel SDK structure. Our code should be optimized for the reader, not the writer. The most important is efficiency, but to build up expandable and easy to maintain coding projects we have to follow basic standards.
+The main point of coding guide is to provide a set of main rules that will be fundamental in our repositories structure. Our code should be optimized for the reader, not for the writer. The most important is efficiency, but to build up expandable and easy to maintain coding projects we have to follow basic standards.
+
+
 
 ## Style
 
@@ -44,7 +65,9 @@ Consistency is the most important aspect of style. The second most important asp
 
 4. Distinguish private class field with a *'m_'* prefix, e.g. - *'m_frameWidth'*(*'m_'* stands for "member").
 
-5. Don't name anything starting with underscore *'_'*.
+5. Distinguish global variables with a *'g_'* prefix, e.g. - *'g_frameWidth'*.
+
+6. Don't name anything starting with underscore *'_'*.
 
 ### Composition
 
@@ -146,6 +169,8 @@ Consistency is the most important aspect of style. The second most important asp
    not `#define PI 3.14159;`, 
    but `constexpr double PI = 3.14159;`.
 
+
+
 ## Memory Management
 
 1. Using smart pointers such as `std::unique_ptr` and `std::shared_ptr` in C++11 and later versions is recommended over raw memory access, allocation, and deallocation to mitigate the risks of memory errors and leaks. When using C-style pointers check twice proper memory (de)allocation.
@@ -206,6 +231,8 @@ Consistency is the most important aspect of style. The second most important asp
 1. Pull-request should be named the same as a branch.
 2. Pull-request can be closed only after approval from all reviewers.
 
+
+
 ## Recommended tools and libraries
 
 1. [Visual Studio Code](https://code.visualstudio.com/download) - simple and powerful IDE.
@@ -213,20 +240,22 @@ Consistency is the most important aspect of style. The second most important asp
 3. [Qt Creator](https://www.qt.io/download) - Qt IDE with Qt GUI tools.
 4. [Sourcetree](https://www.sourcetreeapp.com) - very convenient desktop application for git control.
 
+
+
 # Resources
 
-C++ best practices -
+C++ best practices:
 1. https://github.com/cpp-best-practices/cppbestpractices
 2. https://google.github.io/styleguide/cppguide.html
 3. https://isocpp.org/wiki/faq/coding-standards
 4. Clean C++ - Stephan Roth, 2017
 
 
-Clean Code tips - 
+Clean Code tips:
 
 1. https://gist.github.com/wojteklu/73c6914cc446146b8b533c0988cf8d29
 
-General standards -
+General standards:
 
 1. https://www.devbridge.com/articles/coding-best-practices/
 2. https://medium.com/agile-adapt/composing-meaningful-tasks-c1ca51064c1a

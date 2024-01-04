@@ -71,7 +71,7 @@ README.md ------------ Documentation.
 
 # Library files
 
-The **TemplateLibrary** is a CMake project. Library files chapter should briefly describe what's inside this library. It is very important so every associate or customer will understand what particular repository includes:
+The **TemplateLibrary** is a CMake project. Library files chapter should briefly describe what's inside this repository. It is very important so every associate or customer will understand what particular repository includes:
 
 ```xml
 CMakeLists.txt ------------------- Main CMake file of the library.
