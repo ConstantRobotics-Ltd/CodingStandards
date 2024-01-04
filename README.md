@@ -80,7 +80,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 1. In comment blocks use `//`, not `/* */`. `/* */` is reserved for documentation in header file only.
 
-2. Strive to strike a balance in commenting your code - while it is crucial to provide sufficient comments for clarity and understanding, aim to keep them concise and focused, avoiding unnecessary verbosity to maintain code readability and promote efficient collaboration, e.g. - 
+2. Strive to strike a balance in commenting your code - while it is crucial to provide sufficient comments for clarity and understanding, aim to keep them concise and focused, avoiding unnecessary verbosity to maintain code readability and promote efficient collaboration:
   ```c++
     // Good comment:
     // This equation comes from mass–energy equivalence E=mc^2.
@@ -90,7 +90,7 @@ Consistency is the most important aspect of style. The second most important asp
     // Check if energy was calculated.
     if (energy.isCalculated()) {}
   ```
-3. Curly brackets `{}` are **required** for blocks. It costs you nothing, but can cost a lot of time for someone changing code after you, e.g. 
+3. Curly brackets `{}` are **required** for blocks. It costs you nothing, but can cost a lot of time for someone changing code after you:
   ```c++
     // Bad Idea
     // This compiles and does what you want, but can lead to confusing
@@ -126,7 +126,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 1. Each class, method, field or function has to have descriptive documentation written as a comment in the header file.
 
-2. Use `/* */` only for documentation, e.g. -
+2. Use `/* */` only for documentation:
    ```c++
     /**
      * @brief Set the value for a specific template parameter.
@@ -186,7 +186,7 @@ Consistency is the most important aspect of style. The second most important asp
   };
   ```
 
-10. Use `override` keyword for all polymorphic member functions, this way compiler will report error if you made mistake while overriding a method. 
+10. Use `override` keyword for all polymorphic member functions, this way compiler will report an error if you made mistake while overriding a method. 
   ```cpp
   class Base
   {
