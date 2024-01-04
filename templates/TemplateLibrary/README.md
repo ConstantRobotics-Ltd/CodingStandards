@@ -10,17 +10,17 @@
 
 # Table of contents
 
-- [Overview](#Overview)
-- [Versions](#Versions)
-- [Library files](#Library-files)
-- [TemplateLibrary interface class description](#TemplateLibrary-interface-class-description)
-  - [Class declaration](#Class-declaration)
-  - [getVersion method](#getVersion-method)
-  - [setParam method](#setParam-method)
-  - [getParam method](#getParam-method)
-  - [getParams method](#getParams-method)
-  - [executeCommand method](#executeCommand-method)
-  - [doSomething method](#doSomething-method)
+- [Overview](# Overview)
+- [Versions](# Versions)
+- [Library files](# Library-files)
+- [TemplateLibrary interface class description](# TemplateLibrary-interface-class-description)
+  - [Class declaration](# Class-declaration)
+  - [getVersion method](# getVersion-method)
+  - [setParam method](# setParam-method)
+  - [getParam method](# getParam-method)
+  - [getParams method](# getParams-method)
+  - [executeCommand method](# executeCommand-method)
+  - [doSomething method](# doSomething-method)
 - [Data structures](#Data-structures)
   - [TemplateLibraryCommand enum](#TemplateLibraryCommand-enum)
   - [TemplateLibraryParam enum](#TemplateLibraryParam-enum)
@@ -36,9 +36,9 @@
 
 # Overview
 
-**TemplateLibrary** C++ library is a example of library structure. As well defines data structures and rules to stand as an example for other repositories. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories. This library as example depends on open source [**ConfigReader**](https://github.com/ConstantRobotics-Ltd/ConfigReader) library which provides methods to work with JSON files.
+**TemplateLibrary** C++ library is an example of the library structure. It defines data structures and rules to stand as an example for other repositories. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories. This library, as example, depends on open source [**ConfigReader**](https://github.com/ConstantRobotics-Ltd/ConfigReader) library which provides methods to work with JSON files.
 
-Overview section must include explanation of library purpose, C++ standard, important dependencies and main features. This text will be used for publishing on web site. Provide enough information so that the user can immediately understand the purpose of the library and its compatibility with their project.
+Overview section must include explanation of the purpose of library, C++ standard, important dependencies and main features. This text will be also used for publishing on website. Provide enough information, so that the user can immediately understand the purpose of the library and its compatibility with their project.
 
 Generally any library repository should have following structure:
 
@@ -53,6 +53,7 @@ src ------------------ Source code folder.
 test ----------------- Forlder for tests.
 _static -------------- Folder with images for documentation.
 .gitignore ----------- File to exclude particular files/folders from repository.
+.gitmodules ---------- File defining submodules used in the library.
 CMakeLists.txt ------- Main CMake file.
 README.md ------------ Documentation.
 ```
@@ -63,9 +64,9 @@ README.md ------------ Documentation.
 
 **Table 1** - Library versions.
 
-| Version | Release date | What's new                                                   |
-| ------- | ------------ | ------------------------------------------------------------ |
-| 1.0.0   | DD.MM.YYYY   | - Make sure to update library versions table after each release.<br />- Briefly describe every important change or update. <br />- Use bullet list style. |
+| Version                        | Release date | What's new                                                   |
+| ------------------------------ | ------------ | ------------------------------------------------------------ |
+| 1.0.0<br />[MAJOR.MINOR.PATCH] | DD.MM.YYYY   | - Make sure to update library versions table after each release.<br />- Briefly describe every important change or update. <br />- Use bullet list style. |
 
 
 
@@ -357,11 +358,12 @@ bool encode(uint8_t* data, int bufferSize, int& size, TemplateLibraryParamsMask*
 **TemplateLibraryParamsMask** structure declaration:
 
 ```cpp
-typedef struct TemplateLibraryParamsMask {
+struct TemplateLibraryParamsMask
+{
     bool firstParam{ true };
     bool secondParam{ true };
     bool thirdParam{ true };
-} TemplateLibraryParamsMask;
+};
 ```
 
 Example without parameters mask:
@@ -468,7 +470,7 @@ if(!outConfig.readFromFile("TestTemplateParams.json"))
     "templateParams":
     {
         "firstParam": true,
-        "secondParam": 1
+        "secondParam": 1,
         "thirdParam": 0.5f
     }
 }
