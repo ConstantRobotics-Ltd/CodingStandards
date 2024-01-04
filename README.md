@@ -13,9 +13,9 @@
     - [Naming](###Naming)
     - [Composition](#Composition)
     - [Documentation](#Documentation)
-    - [Good practices](###Good practices)
-  - [Memory Management](##Memory Management)
-  - [Code Management](##Code Management)
+    - [Good practices](###Good-practices)
+  - [Memory Management](##Memory-Management)
+  - [Code Management](##Code-Management)
   	- [Commits](###Commits)
   	- [Branches](###Branches)
   	- [Pull-requests](###Pull-requests)
@@ -163,7 +163,7 @@ Consistency is the most important aspect of style. The second most important asp
     virtual void foo();
   };
 
-  class Derived
+  class Derived : public Base
   {
     void foo() override;
   };
@@ -171,12 +171,7 @@ Consistency is the most important aspect of style. The second most important asp
 
 11. No destructor is always better when it’s the correct thing to do. If you dont need destructor, dont define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
-12. Try to avoid using global state. There are two main reasons :
-  - Global state can result in subtle and difficult to trace bugs where one function changes global state, and another function either relies on that change or is adversely affected by it.
-  - It is never known who might update the value.
-
-If you cant avoid using them at least make them internally linked by using unnamed namespaces. By this way, it will be invisible even if it is externed from another source file.
-
+12. Try to avoid using global state. If you can't avoid using them at least try to make them internally linked by using unnamed namespaces.
 
 ## Memory Management
 
@@ -203,7 +198,7 @@ If you cant avoid using them at least make them internally linked by using unnam
 
 6. If semantically correct prefer `++i` over `i++`. Pre-increment is faster than post-increment (it doesn't require copy of the object being made).
 
-7. If there is a chance that your class will be used as base class. Always keep destructor virtual. This is OBLIGATORY rule.
+7. If there is a chance that your class will be used as a base class, always keep destructor virtual.
 
 8. When you define a destructor in a class, it's important to also explicitly define or delete all constructors and assignment operators. This ensures proper management of resources, as the compiler's implicit versions may not handle resource management correctly. This rule is known as [Rule of three (until C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three) or [Rule of five (after C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three)
 
