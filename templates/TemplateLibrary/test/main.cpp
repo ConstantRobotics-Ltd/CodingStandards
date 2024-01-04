@@ -3,13 +3,19 @@
 
 
 
-/// Copy params test.
+/**
+ * @brief Copy params test.
+ */
 bool copyParametersTest();
 
-/// Encode/decode params test without mask.
+/**
+ * @brief Encode/decode params test without mask.
+ */
 bool encodeDecodeTestWithoutMask();
 
-/// Encode/decode params test with mask.
+/**
+ * @brief Encode/decode params test with mask.
+ */
 bool encodeDecodeTestWithMask();
 
 
@@ -20,27 +26,36 @@ int main(void)
 
 	std::cout << "Copy parameters test:" << std::endl;
 	if (copyParametersTest())
+	{
 		std::cout << "OK" << std::endl;
+	}
 	else
+	{
 		std::cout << "ERROR" << std::endl;
+	}
 	std::cout << std::endl;
 
 	std::cout << "Encode/decode params test without mask:" << std::endl;
 	if (encodeDecodeTestWithoutMask())
+	{
 		std::cout << "OK" << std::endl;
+	}
 	else
+	{
 		std::cout << "ERROR" << std::endl;
+	}
 	std::cout << std::endl;
 
 	std::cout << "Encode/decode params test with mask:" << std::endl;
 	if (encodeDecodeTestWithMask())
+	{
 		std::cout << "OK" << std::endl;
+	}
 	else
+	{
 		std::cout << "ERROR" << std::endl;
+	}
 	std::cout << std::endl;
-
-
-
 
 	return 1;
 }
@@ -127,6 +142,7 @@ bool encodeDecodeTestWithoutMask()
 
 	return result;
 }
+
 
 
 bool encodeDecodeTestWithMask()
