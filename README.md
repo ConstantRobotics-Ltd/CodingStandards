@@ -1,31 +1,30 @@
-![logo](_static/standards_web_logo.png)
+![standards_web_logo](./static/standards_web_logo.png)
 
 
 
 # **Coding Standards**
 
-**v1.0.0**
+**v1.0.1**
 
 
 
 # Table of contents
 
-- [Overview](#Overview)
-- [Versions](#Versions)
-- [Coding Guide](#Coding-Guide)
-  - [General rules](##General-rules)
-  - [Style](##Style)
-    - [Naming](###Naming)
-    - [Composition](###Composition)
-    - [Documentation](###Documentation)
-    - [Good practices](###Good-practices)
-  - [Memory Management](##Memory-Management)
-  - [Code Management](##Code-Management)
-    - [Commits](###Commits)
-    - [Branches](###Branches)
-    - [Pull-requests](###Pull-requests)
-
-- [Resources](#Resources)
+- [Overview](#overview)
+- [Versions](#versions)
+- [Coding Guide](#coding-guide)
+  - [General rules](##general-rules)
+  - [Style](#style)
+    - [Naming](#naming)
+    - [Composition](#composition)
+    - [Documentation](#documentation)
+    - [Good practices](#good-practices)
+  - [Memory Management](#memory-management)
+  - [Code Management](#code-management)
+    - [Commits](#commits)
+    - [Branches](#branches)
+    - [Pull-requests](#pull-requests)
+- [Resources](#resources)
 
 
 
@@ -42,6 +41,7 @@ This is ConstantRobotics' Coding Standards document. This guide outlines essenti
 | Version | Release date | What's new                                                   |
 | ------- | ------------ | ------------------------------------------------------------ |
 | 1.0.0   | 04.01.2024   | First version of standards, which includes:<br />- Style guide.<br />- Memory management guide.<br />- Templates for library and application with documentation guide.<br />- List of resources. |
+| 1.0.1   | 17.05.2024   | Documentation and structure updated. |
 
 
 
@@ -57,12 +57,16 @@ The main point of coding guide is to provide a set of main rules that will be fu
 2. Everything you write have to be compatible with [C++ 17](https://en.cppreference.com/w/cpp/17). Any departure from this principle have to be clearly mentioned in repository's documentation.
 3. Always include "README.md" file to the repository.
 4. If there is a chance that your class will be used as a base class, always keep destructor virtual.
-5. No destructor is always better when it’s the correct thing to do. If you dont need destructor, dont define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three).
+5. No destructor is always better when it’s the correct thing to do. If you don't need destructor, don't define the one. This rule is know as [Rule of zero](https://en.cppreference.com/w/cpp/language/rule_of_three).
 6. When you define a destructor in a class, it's important to also explicitly define or delete all constructors and assignment operators. This ensures proper management of resources, as the compiler's implicit versions may not handle resource management correctly. This rule is known as [Rule of three (until C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three) or [Rule of five (after C++11)](https://en.cppreference.com/w/cpp/language/rule_of_three)
+
+
 
 ## Style
 
 Consistency is the most important aspect of style. The second most important aspect is following a style, that the average C++ programmer is used to reading. C++ allows for arbitrary-length identifier names, so there's no reason to be terse when naming things. Use descriptive names and be consistent in the style.
+
+
 
 ### Naming
 
@@ -77,6 +81,8 @@ Consistency is the most important aspect of style. The second most important asp
 5. Distinguish global variables with a *'g_'* prefix, e.g. - `g_frameWidth` (`g_` stands for "global").
 
 6. Don't name anything starting with underscore *'_'*.
+
+
 
 ### Composition
 
@@ -123,6 +129,8 @@ Consistency is the most important aspect of style. The second most important asp
 5. Keep lines a reasonable length. In header files do not cross length of **80** characters.
 6. Namespace name should be descriptive and short. Before adding a new namespace check if it doesn't exist in different form. For example do not add `cr::image` if there is already `cr::frame`.
 7. Keep 3-lines space between each method or function body.
+
+
 
 ### Documentation
 
