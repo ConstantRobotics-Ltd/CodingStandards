@@ -4,7 +4,7 @@
 
 # **Coding Standards**
 
-**v1.0.1**
+**v1.1.0**
 
 
 
@@ -41,7 +41,8 @@ This is ConstantRobotics' Coding Standards document. This guide outlines essenti
 | Version | Release date | What's new                                                   |
 | ------- | ------------ | ------------------------------------------------------------ |
 | 1.0.0   | 04.01.2024   | First version of standards, which includes:<br />- Style guide.<br />- Memory management guide.<br />- Templates for library and application with documentation guide.<br />- List of resources. |
-| 1.0.1   | 17.05.2024   | Documentation and structure updated. |
+| 1.0.1   | 17.05.2024   | - Documentation and structure updated.                       |
+| 1.1.0   | 06.08.2024   | - Library template updated.                                  |
 
 
 
