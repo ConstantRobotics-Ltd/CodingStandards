@@ -36,7 +36,7 @@
 
 # Overview
 
-**TemplateLibrary** C++ library is an example of the library structure. It defines data structures and rules to stand as an example for other repositories. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories. This library, as example, depends on open source [ConfigReader](https://rapidpixel.constantrobotics.com/docs/service-libraries/config-reader.html) library which provides methods to work with JSON files.
+**TemplateLibrary** C++ library is an example of the library structure. It defines data structures and rules to stand as an example for other repositories. In accordance with our documentation standards, it is mandatory for every repository within our project to include a README file like this one. This README should provide comprehensive information about the repository, including its purpose, usage guidelines, and any essential instructions for contributors. Please ensure that the README file follows the format and content similar to the one you are currently reviewing. This practice contributes to consistency, transparency, and ease of use across all our repositories. This library, as example, depends on open source [ConfigReader](https://rapidpixel.constantrobotics.com/docs/Service/ConfigReader.html) library which provides methods to work with JSON files.
 
 Overview section must include explanation of the purpose of library, C++ standard, important dependencies and main features. This text will be also used for publishing on website. Provide enough information, so that the user can immediately understand the purpose of the library and its compatibility with their project.
 
@@ -448,7 +448,7 @@ params2.decode(buffer, size);
 
 ## Read params from JSON file and write to JSON file
 
-**TemplateLibrary** depends on open source [ConfigReader](https://rapidpixel.constantrobotics.com/docs/service-libraries/config-reader.html) library which provides method to read params from JSON file and to write params to JSON file. Example of writing and reading params to JSON file:
+**TemplateLibrary** depends on open source [ConfigReader](https://rapidpixel.constantrobotics.com/docs/Service/ConfigReader.html) library which provides method to read params from JSON file and to write params to JSON file. Example of writing and reading params to JSON file:
 
 ```cpp
 // Write params to file.
