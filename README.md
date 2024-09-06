@@ -181,11 +181,13 @@ Consistency is the most important aspect of style. The second most important asp
 7. Use C++-style cast instead of C-style cast. Use the C++-style cast (`static_cast<>, dynamic_cast<>` ...) instead of the C-style cast. The C++-style cast allows more compiler checks and is considerably safer. Additionally the C++ cast style is more visible and has the possibility to search for. [Further reading](https://anteru.net/blog/2007/c-background-static-reinterpret-and-c-style-casts/).
 
 8. Avoid using macros for constant values. Use constexpr:
+
    not `#define PI 3.14159;`, 
+   
    but `constexpr double PI = 3.14159;`.
   
 9. Use scoped enums (**enum class**). They prevent implicit conversions to other types, reducing bugs, and avoid name conflicts by scoping enumerators within the enum.
-  ```cpp
+  ```c++
   enum class Color 
   {
     RED,
@@ -195,7 +197,7 @@ Consistency is the most important aspect of style. The second most important asp
   ```
 
 10. Use `override` keyword for all polymorphic member functions, this way compiler will report an error if you made mistake while overriding a method. 
-  ```cpp
+  ```c++
   class Base
   {
     virtual void foo() = 0;
